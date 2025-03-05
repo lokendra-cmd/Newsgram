@@ -9,9 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.66.9",
+    "@tanstack/react-query-devtools": "^5.66.9",
+    "axios": "^1.8.1",
+    "he": "^1.2.0",
+    "jotai": "^2.12.1",
+    "next": "15.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.2.0"
+    "react-intersection-observer": "^9.15.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
