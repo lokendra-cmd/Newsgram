@@ -4,7 +4,7 @@ import axios from "axios";
 import { useAtom } from "jotai";
 import { categoryAtom } from "@/app/StateManagement/Category"; 
 
-const API_BASE_URL = "http://api.mediastack.com/v1/news";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const API_TOKEN = process.env.NEXT_PUBLIC_NEWS_API_KEY;
 const LIMIT = 15; // Number of articles per request
 
