@@ -11,7 +11,6 @@ const LIMIT = 15; // Number of articles per request
 export default function useNews() {
   const [category] = useAtom(categoryAtom); // Read category from atom
 
-  // Fetch function now uses category from atom
   const fetchNews = async ({ pageParam = 0 }) => {
     try {
       const response = await axios.get(API_BASE_URL, {
@@ -25,21 +24,25 @@ export default function useNews() {
         },
       });
 
-      const newsData = response.data.data || [];
+      if (!response.data || !response.data.data) {
+        throw new Error("No news data available.");
+      }
+
+      const newsData = response.data.data;
 
       return {
         news: newsData,
         nextOffset: newsData.length === LIMIT ? pageParam + LIMIT : null,
       };
     } catch (error) {
-      console.error("Error fetching news:", error);
-      return { news: [], nextOffset: null };
+      throw new Error(error.response?.data?.error || "Failed to fetch news. Please try again.");
     }
   };
 
   return useInfiniteQuery({
-    queryKey: ["news", category], // When category changes, query refetches automatically
+    queryKey: ["news", category], // Refetches when category changes
     queryFn: fetchNews,
     getNextPageParam: (lastPage) => lastPage.nextOffset,
+    retry: false, // Disable auto-retry if needed
   });
 }
