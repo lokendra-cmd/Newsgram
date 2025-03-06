@@ -39,7 +39,7 @@ function NewsFeed() {
   return (
     <div className="bg-[#121212] text-white min-h-screen">
       <Header />
-      <div className="flex flex-wrap gap-[2vw] justify-center mt-[15vh]">
+      <div className="flex flex-row md:flex-wrap gap-[2vw] justify-center mt-[15vh]">
         {data?.pages.map((page, i) =>
           page.news.map((newsItem, index) => (
             <NewsCard key={newsItem.url || index} newsItem={newsItem} />
@@ -47,7 +47,7 @@ function NewsFeed() {
         )}
       </div>
       <div ref={loadMoreRef} className="h-10 text-center text-gray-400">
-        {isFetchingNextPage ? "Loading more..." : "Scroll down for more"}
+        {isFetchingNextPage ? "Loading..." : "Loading..."}
       </div>
     </div>
   );
